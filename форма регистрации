@@ -1,0 +1,47 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>Форма регистрации</title> 
+</head> 
+<body> 
+  <h2>Форма регистрации</h2> 
+  <form action="обработчик.php" method="post"> 
+    <label for="fio">ФИО:</label> 
+    <input type="text" id="fio" name="fio" required><br><br> 
+ 
+    <label for="phone">Телефон:</label> 
+    <input type="tel" id="phone" name="phone" required><br><br> 
+ 
+    <label for="email">E-mail:</label> 
+    <input type="email" id="email" name="email" required><br><br> 
+ 
+    <label for="dob">Дата рождения:</label> 
+    <input type="date" id="dob" name="dob" required><br><br> 
+ 
+    <label>Пол:</label><br> 
+    <input type="radio" id="male" name="gender" value="Мужской" required> 
+    <label for="male">Мужской</label><br> 
+    <input type="radio" id="female" name="gender" value="Женский"> 
+    <label for="female">Женский</label><br><br> 
+ 
+    <label for="programming-languages">Любимый язык программирования:</label><br> 
+    <select id="programming-languages" name="programming-languages[]" multiple required> 
+      <option value="Pascal">Pascal</option> 
+      <option value="C">C</option> 
+      <option value="C++">C++</option> 
+      <option value="JavaScript">JavaScript</option> 
+      <option value="PHP">PHP</option> 
+      <option value="Python">Python</option> 
+      <option value="Java">Java</option> 
+    </select><br><br> 
+ 
+    <label for="bio">Биография:</label><br> 
+    <textarea id="bio" name="bio" rows="5" cols="40"></textarea><br><br> 
+ 
+    <input type="checkbox" id="contract" name="contract" required> 
+    <label for="contract">С контрактом ознакомлен(а)</label><br><br> 
+ 
+    <input type="submit" value="Сохранить"> 
+  </form> 
+</body> 
+</html>
