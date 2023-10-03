@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>first lesson</title>
+</head>
+<body>
+<ol>
+    <li><a href="http://kubsu.ru/">абсолютную гиперссылку на главную страницу сайта kubsu.ru</a></li>
+    <li><a href="https://kubsu.ru/">абсолютную на главную сайта kubsu.ru в протоколе https</a></li>
+    <li><a href="https://www.kubsu.ru/lib/images/kubgu.png">КубГУ картинка</a></li>
+    <li><a href="/page2.html">сокращенную ссылку на внутреннюю страницу</a></li>
+    <li><a href="./index.html">сокращенную ссылку на главную страницу</a></li>
+    <li><a href="#bottom">ссылку на фрагмент текущей страницы</a></li>
+    <li><a href="http://kubsu.ru/?product=socks&color=black&size=m">ссылка с тремя параметрами URL</a></li>
+    <li> <a href="https://www.kubsu.ru/index.php/?id=section-content">Ссылка с параметром id в URL</a></li>
+    <li><a href="./page2.html">относительную на страницу в текущем каталоге</a></li>
+    <li><a href="./about/about.html">относительную на страницу в каталоге about</a></li>
+    <li><a href="./level1/level2/page3.html">ссылка на два каталога ниже</a></li>
+    <li><a id="aInText" href="https://kubsu.ru/">КубГу</a>контекстную в тексте абзаца</p></li>
+    <li> <a href="https://www.kubsu.ru/index.php/#section-content">ссылку на фрагмент страницы стороннего сайта</a></li>
+    <li><p>Картинка </p>
+    <map name="cool" style="margin: 30px">
+        <area href="https://kubsu.ru/" shape="rect" coords="0,0,100,100" alt="прямоугольная">
+        <area href="https://kubsu.ru/" shape="circle" coords="200,200,50" alt="круглая область">
+        <img src="foto/image.jpg" alt="img" usemap="#cool"  width="300" height="300">
+    </map></li>
+    <li> <a href="">ссылку с пустым href</a></li>
+    <li><a> ссылку без href</a></li>
+    <li> <a href="https://kubsu.ru/" rel="nofollow">ссылку, по которой запрещен переход поисковикам </a></li>
+    <li><a href="https://kubsu.ru/">ссылку запрещенную для индексации поисковиками </a></li>
+    <li><ol>
+        <li title="первый"><a href="page2.html">ссылка в списке 1</a></li>
+        <li title="второй"><a href="./level1/level2/page3.html">ссылка в списке 2</a></li>
+        <li title="третий"><a href="./about/about.html">ссылка в списке 3</a></li>
+    </ol></li>
+    <li><a href="ftp://demo:demo@http://demo.wftpserver.com/main.html/download/Summer.jpg">ссылку на файл на сервере FTP с авторизацией</a></li>
+    <li><a href="./components/form.html">форма</a></li>
+</ol>
+<a id="bottom"></a>
+</body>
+</html>
