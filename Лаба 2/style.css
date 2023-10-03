@@ -35,7 +35,7 @@ nav {
 
 main {
     max-width: 960px;
-    margin: 0 auto;
+    margin: 40px auto;
     background-color: #e99295;
     border-radius: 30px;
 }
@@ -83,7 +83,7 @@ footer {
     color: rgb(17, 10, 10);
     margin: 0;
     position: relative;
-    top: 50px;
+    top: 10px;
 }
 
 .nav-item-wraper {
