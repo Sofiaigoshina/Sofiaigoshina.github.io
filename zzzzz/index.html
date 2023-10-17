@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>2 lesson</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body class="root">
+<header>
+    <div class="header-wraper">
+        <div class="head">
+            <img src="images/logo.png" alt="Логотип" class="logo">
+            <h3 class="name-project">Какой-то сайт</h3>
+        </div>
+        <nav>
+            <ul class="nav-wraper">
+                <li class="nav-item-wraper"><a href="page2.html" class="nav-item">страница 2</a></li>
+                <li class="nav-item-wraper"><a href="level1/level2/page3.html" class="nav-item">страница 3</a></li>
+                <li class="nav-item-wraper"><a href="/about/about.html" class="nav-item">о нас</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+    <ol>
+        <li><a href="http://kubsu.ru/">абсолютная ссылка КубГу</a></li>
+        <li><a href="https://kubsu.ru/">абсолютная ссылка КубГу в протаколе https</a></li>
+        <li><a href="/images/image.jpg"><img class="imgHref" src="images/image.jpg" alt="цветок"></a></li>
+        <li><a href="./page2.html">cокращенная ссылка на внутреннюю страницу</a></li>
+        <li><a href="./index.html">ссылка на главную</a></li>
+        <li><a href="#bottom">нижняя часть страницы(фрагмент текущей)</a></li>
+        <li><a href="http://kubsu.ru/?product=socks&color=black&size=m">ссылка с тремя параметрами кубгу</a></li>
+        <!--  параметры выдумал, так не знаю какие они есть конкретно на сайте универа  -->
+        <li><a href="https://en.wikipedia.org/wiki/Web_browsing_history?id=Research">Ссылка с параметром id</a></li>
+        <li><a href="./page2.html">Относительная ссылка на страницу в текущем каталоге</a></li>
+        <li><a href="./about/about.html">Относительная ссылка на about в каталоге about</a></li>
+        <!-- ссылка на католог выше находится в about.html -->
+        <li><a href="./level1/level2/page3.html">ссылка на два каталога ниже(выше на 2 будет на странице под этой
+            ссылке)</a></li>
+        <li><p>Мы все учимся в <a id="aInText" href="https://kubsu.ru/">КубГу</a>(контекстная ссылка в тексте)</p></li>
+        <li><a href="https://en.wikipedia.org/wiki/Web_browsing_history#Personalized_pricing">ссылка на секцию в
+            стороннем
+            сайте</a></li>
+        <li><p>map, левый верхний и правый нижний угол</p>
+            <map name="Image">
+                <area href="https://kubsu.ru/" shape="rect" coords="0,0,100,100" alt="ссылка на квадратном объекте">
+                <area href="https://kubsu.ru/" shape="circle" coords="200,200,25" alt="ссылка на круглом объекте">
+            </map>
+            <img src="./images/image.jpg" usemap="#Image" alt="цветок" class="imgHref">
+        </li>
+        <li><a href="">ссылка с пустым href</a></li>
+        <li><a> ссылка без href</a></li>
+        <li><a href="https://kubsu.ru/" rel="nofollow">ссылка по которой нельзя следовать яндексу</a></li>
+        <li><!--noindex--><a href="https://kubsu.ru/">ссылка по которой нельзя индексировать яндексу</a><!--/noindex-->
+        </li>
+        <li>
+            <ol>
+                <li title="первый"><a href="page2.html">ссылка в списке 1</a></li>
+                <li title="второй"><a href="./level1/level2/page3.html">ссылка в списке 2</a></li>
+                <li title="третий"><a href="./about/about.html">ссылка в списке 3</a></li>
+            </ol>
+        </li>
+        <li><a href="ftp://demo:demo@http://demo.wftpserver.com/main.html/download/Summer.jpg">ftp файл</a></li>
+        <li><a href="./components/form.html">форма</a></li>
+    </ol>
+    <table class="first-table">
+        <caption>таблица</caption>
+        <thead>
+        <tr>
+            <th scope="col">1 колонка</th>
+            <th scope="col">2 колонк</th>
+            <th scope="col">3 колонк</th>
+            <th scope="col">4 колонк</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="chet-item">
+            <th scope="row">какое-то поле</th>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+        </tr>
+        <tr>
+            <th scope="row">какое-то поле</th>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+        </tr>
+        <tr class="chet-item">
+            <th scope="row">какое-то поле</th>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+        </tr>
+        <tr>
+            <th scope="row">какое-то поле</th>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+        </tr>
+        <tr class="chet-item">
+            <th scope="row">какое-то поле</th>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+        </tr>
+        <tr>
+            <th scope="row">какое-то поле</th>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+            <td>какое-то поле</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr class="chet-item">
+            <th scope="row" colspan="2">какое-то поле</th>
+            <td colspan="2">какое-то поле</td>
+        </tr>
+        </tfoot>
+    </table>
+</main>
+<footer>
+    <a id="bottom"></a>
+    <p>Студент: ваша фамилия</p>
+
+</footer>
+
+</body>
+</html>
