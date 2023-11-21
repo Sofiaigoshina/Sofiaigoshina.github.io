@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFC0CB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .container {
+    overflow: hidden; 
+    border-radius: 10px;
+    border: 1px solid black;
+  }
+  
+  .popup {
+    display: none;
+    background-color: rgb(201, 119, 119);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(108, 39, 39, 0.1);
+    width: 300px; 
+    border-radius: 10px;
+    border: 1px solid black;
+  }
+  
+  .popup-content {
+    padding: 20px;
+  }
+  
+  .close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  #feedback-form label,
+  #feedback-form input,
+  #feedback-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 5px; 
+  }
+  
+  #feedback-form textarea {
+    resize: vertical;
+    border-radius: 5px;
+  }
+  
+  #feedback-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(246, 179, 179);
+    color: rgb(36, 28, 28);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .form-status {
+    margin-top: 10px;
+    font-weight: bold;
+    color: rgb(253, 248, 248);
+  }
+  
+  #feedback-form label {
+    display: flex;
+    align-items: center;
+  }
+  
+  #feedback-form input[type="checkbox"] {
+    margin-right: 5px;
+    width: 30px; 
+    height: 16px;
+    border: 1px solid #ccc; 
+    border-radius: 3px; 
+    vertical-align: middle;
+    position: relative;
+    margin-right: 10px;
+  }
+
