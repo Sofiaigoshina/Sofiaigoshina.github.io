@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма регистрации</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="root">
+<form method="post" action="/" class="forms">
+    <label>
+        <br />
+        <input placeholder="ФИО:" />
+    </label><br />
+    <label>
+        <input type="tel" placeholder="Телефон:" />
+    </label><br />
+    <label>
+        <input type="email" placeholder="E-mail" />
+    </label><br />
+    <label>
+        Дата рождения:<br/>
+        <input type="date" />
+    </label><br />
+    <label>
+    <input type="radio" value="male" />
+    Мужской</label>
+    <label>
+    <input type="radio" value="female" />
+    Женский</label> <br />
+    <label>
+        <br />
+        <select>
+            <option disabled>Любимый язык программирования:</option>
+            <option value="Pascal">Pascal</option> 
+            <option value="C">C</option> 
+            <option value="C++">C++</option> 
+            <option value="JavaScript">JavaScript</option> 
+            <option value="PHP">PHP</option> 
+            <option value="Python">Python</option> 
+            <option value="Java">Java</option> 
+        </select>
+    </label>
+    <br />
+    <label>
+        <textarea placeholder="Биография:"></textarea>
+    </label><br />
+    <label>
+        С контрактом ознокомлен(а)
+        <input type="checkbox">
+    </label><br />
+    <input type="submit" value="Сохранить" />
+</form>
+</body>
+</html>
