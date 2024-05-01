@@ -1,0 +1,40 @@
+/* Общие стили */
+body {
+    font-family: sans-serif;
+    background-color: #f9eef7; 
+    color: #3a3131; 
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto; 
+    padding: 20px;
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #E91E63; 
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-top: 0;
+    color: #778899;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border: 1px solid #F0F0F0; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
