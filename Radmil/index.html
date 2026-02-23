@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>23 февраля</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1a0f2e 0%, #2d1a4a 50%, #1f0f3a 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+            margin: 0;
+        }
+
+        .card {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(40, 20, 60, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 25px 20px;
+            border-radius: 50px;
+            border: 3px solid #9f7aea;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 30px #9f7aea;
+            position: relative;
+        }
+
+        /* Индикатор музыки */
+        .music-indicator {
+            background: rgba(60, 30, 80, 0.8);
+            border: 1px solid #b794f4;
+            border-radius: 50px;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            display: inline-block;
+            font-size: 1rem;
+            color: #d8b4fe;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .music-indicator span {
+            animation: pulse 2s infinite;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Машинки едут фоном */
+        .cars-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+            border-radius: 50px;
+            opacity: 0.15;
+        }
+
+        .car {
+            position: absolute;
+            font-size: 2rem;
+            animation: drive linear infinite;
+            filter: drop-shadow(0 0 5px #c084fc);
+        }
+
+        @keyframes drive {
+            0% { transform: translateX(-20%) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateX(120%) rotate(2deg); opacity: 0.8; }
+        }
+
+        h1 {
+            color: #d8b4fe;
+            text-align: center;
+            font-size: clamp(2rem, 7vw, 3.5rem);
+            text-shadow: 0 0 20px #9f7aea, 2px 2px 0 #2d1a4a;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .poem {
+            background: #2d1a4a;
+            padding: 25px 20px;
+            border-radius: 40px;
+            border: 2px solid #b794f4;
+            margin: 25px 0;
+            box-shadow: inset 0 0 20px #4a2c6a;
+            min-height: 280px;
+        }
+
+        .line {
+            color: #f0e6ff;
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            line-height: 1.6;
+            margin: 12px 0;
+            font-family: 'Courier New', monospace;
+            border-right: 2px solid #d8b4fe;
+            white-space: normal;
+            word-break: break-word;
+            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            text-shadow: 0 0 8px #b794f4;
+        }
+
+        .line.done {
+            border-right: none;
+        }
+
+        .line.typing {
+            animation: blinkCursor 1s infinite;
+        }
+
+        @keyframes blinkCursor {
+            50% { border-color: transparent; }
+        }
+
+        .family {
+            display: flex;
+            justify-content: center;
+            gap: clamp(25px, 6vw, 50px);
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .member {
+            text-align: center;
+            color: #d8b4fe;
+            font-size: clamp(2.2rem, 7vw, 3rem);
+            filter: drop-shadow(0 0 10px #b794f4);
+            animation: float 3s infinite ease-in-out;
+            min-width: 90px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .member span {
+            display: block;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: white;
+            background: #2d1a4a;
+            padding: 6px 12px;
+            border-radius: 30px;
+            margin-top: 8px;
+            border: 1px solid #b794f4;
+            white-space: nowrap;
+        }
+
+        .surprise {
+            background: #2d1a4a;
+            color: #f0e6ff;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            padding: 25px 20px;
+            border-radius: 40px;
+            border: 2px solid #b794f4;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 0 20px #9f7aea;
+            line-height: 1.5;
+        }
+
+        .surprise .emoji {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            margin: 15px 0;
+        }
+
+        footer {
+            text-align: center;
+            color: #d8b4fe;
+            margin-top: 25px;
+            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
+            border-top: 1px solid #b794f4;
+            padding-top: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .family {
+                gap: 15px;
+            }
+            .member {
+                min-width: 70px;
+            }
+            .member span {
+                font-size: 0.8rem;
+                padding: 4px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Машинки фоном -->
+        <div class="cars-bg" id="carsBg"></div>
+
+        <!-- Индикатор музыки -->
+        <div class="music-indicator" id="musicIndicator">
+            <span>🔈</span> Нажми на экран, чтобы включить музыку
+        </div>
+
+        <h1>С 23 ФЕВРАЛЯ, РАДМИЛ!</h1>
+
+        <div class="poem" id="poem">
+            <div class="line" id="line1"></div>
+            <div class="line" id="line2"></div>
+            <div class="line" id="line3"></div>
+            <div class="line" id="line4"></div>
+            <div class="line" id="line5"></div>
+            <div class="line" id="line6"></div>
+            <div class="line" id="line7"></div>
+            <div class="line" id="line8"></div>
+            <div class="line" id="line9"></div>
+            <div class="line" id="line10"></div>
+            <div class="line" id="line11"></div>
+            <div class="line" id="line12"></div>
+            <div class="line" id="line13"></div>
+            <div class="line" id="line14"></div>
+        </div>
+
+        <div class="family">
+            <div class="member">💻<span>Программирование</span></div>
+            <div class="member">📚<span>Учеба</span></div>
+            <div class="member">🏡<span>Семья</span></div>
+            <div class="member">💪<span>Защитник</span></div>
+        </div>
+
+        <div class="surprise">
+            <div class="emoji">🚗 🏎️ 🚙</div>
+            🎁 СЮРПРИЗ! 🎁<br><br>
+            Ты будущий защитник семьи,<br>
+            Маме помогай, брата береги.<br>
+            Крепкого здоровья, сил, удачи,<br>
+            Пусть всё в жизни много значит!<br><br>
+            <div class="emoji">💪 🛡️ ⭐</div>
+        </div>
+
+        <footer>
+            С уважением, Софа 💜
+        </footer>
+    </div>
+
+    <!-- Аудио элемент -->
+    <audio id="bgMusic" loop preload="auto" style="display: none;">
+        <source src="Радмил.mp3" type="audio/mpeg">
+        Твой браузер не поддерживает аудио
+    </audio>
+
+    <script>
+        // Машинки
+        function createCars() {
+            const carsContainer = document.getElementById('carsBg');
+            const carEmojis = ['🚗', '🚕', '🚙', '🚓', '🏎️', '🚐'];
+
+            // Очищаем контейнер
+            carsContainer.innerHTML = '';
+
+            for (let i = 0; i < 15; i++) {
+                const car = document.createElement('div');
+                car.className = 'car';
+                car.innerHTML = carEmojis[Math.floor(Math.random() * carEmojis.length)];
+                car.style.top = Math.random() * 100 + '%';
+                car.style.animationDelay = Math.random() * 5 + 's';
+                car.style.fontSize = 1.5 + Math.random() * 2 + 'rem';
+                car.style.animationDuration = 2 + Math.random() * 3 + 's'; // Быстрее
+                carsContainer.appendChild(car);
+            }
+        }
+
+        // Стих для Радмила
+        const lines = [
+            "С 23 Февраля, Радмил, поздравляю!",
+            "Крепкого здоровья от души желаю.",
+            "Ты с мамой и братом — одна семья,",
+            "Гордость и опора, надежда и сила твоя.",
+            "",
+            "В учёбе успехов, побед и открытий,",
+            "Много новых идей и достижений, Радмил!",
+            "Будь всегда смелым, сильным и добрым,",
+            "Пусть всё получается в жизни огромной.",
+            "",
+            "Маме помогай, брата не бросай,",
+            "Будь опорой для них, с каждым днём вырастай.",
+            "С праздником, друг! Верь в себя и мечтай,",
+            "Выше и выше всегда взлетай!"
+        ];
+
+        // Музыка
+        let audio = document.getElementById('bgMusic');
+        let musicIndicator = document.getElementById('musicIndicator');
+        let musicStarted = false;
+
+        window.onload = function() {
+            createCars();
+            setTimeout(typeLines, 1000);
+
+            audio.volume = 0.7;
+
+            // Пытаемся включить автоматически (редко работает)
+            audio.play().then(() => {
+                musicStarted = true;
+                musicIndicator.innerHTML = '<span>🔊</span> Музыка играет';
+            }).catch(() => {
+                // Ждём клик
+                musicIndicator.innerHTML = '<span>🔈</span> Нажми на экран';
+            });
+        };
+
+        // Включение по клику/касанию
+        document.body.addEventListener('touchstart', function startMusic() {
+            if (!musicStarted) {
+                audio.play().then(() => {
+                    musicStarted = true;
+                    musicIndicator.innerHTML = '<span>🔊</span> Музыка играет';
+                }).catch(e => console.log('Ошибка:', e));
+            }
+        }, { once: true });
+
+        document.body.addEventListener('click', function startMusicClick() {
+            if (!musicStarted) {
+                audio.play().then(() => {
+                    musicStarted = true;
+                    musicIndicator.innerHTML = '<span>🔊</span> Музыка играет';
+                }).catch(e => console.log('Ошибка:', e));
+            }
+        }, { once: true });
+
+        function typeLines() {
+            let lineIndex = 0;
+            function typeNextLine() {
+                if (lineIndex >= lines.length) return;
+
+                const line = lines[lineIndex];
+                const element = document.getElementById('line' + (lineIndex + 1));
+
+                if (!element) {
+                    lineIndex++;
+                    setTimeout(typeNextLine, 100);
+                    return;
+                }
+
+                if (line === "") {
+                    element.textContent = '';
+                    element.classList.add('done');
+                    lineIndex++;
+                    setTimeout(typeNextLine, 300);
+                    return;
+                }
+
+                let charIndex = 0;
+                element.textContent = '';
+                element.classList.add('typing');
+
+                function typeChar() {
+                    if (charIndex < line.length) {
+                        element.textContent += line[charIndex];
+                        charIndex++;
+                        setTimeout(typeChar, 100);
+                    } else {
+                        element.classList.remove('typing');
+                        element.classList.add('done');
+                        lineIndex++;
+                        setTimeout(typeNextLine, 500);
+                    }
+                }
+                typeChar();
+            }
+            typeNextLine();
+        }
+
+        // Проверка наличия файла
+        audio.addEventListener('error', function() {
+            musicIndicator.innerHTML = '<span>❌</span> Файл Радмил.mp3 не найден';
+        });
+    </script>
+</body>
+</html>
