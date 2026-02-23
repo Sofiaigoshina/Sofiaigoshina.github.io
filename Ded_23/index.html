@@ -36,7 +36,6 @@
             position: relative;
         }
 
-        /* Листочки */
         .leaves {
             position: absolute;
             top: 0;
@@ -61,7 +60,6 @@
             100% { transform: translateY(110%) rotate(360deg); opacity: 0.1; }
         }
 
-        /* Индикатор музыки */
         .music-indicator {
             background: rgba(20, 50, 30, 0.8);
             border: 1px solid #8b9a46;
@@ -109,14 +107,15 @@
 
         .line {
             color: #f4e9cd;
-            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
-            line-height: 1.6;
-            margin: 12px 0;
+            font-size: clamp(1rem, 3.5vw, 1.3rem);
+            line-height: 1.5;
+            margin: 10px 0;
             font-family: 'Courier New', monospace;
             border-right: 2px solid #e9c46a;
-            white-space: nowrap;
+            white-space: normal; /* ← ПЕРЕНОС СТРОК */
+            word-break: break-word;
             overflow: hidden;
-            width: fit-content;
+            width: 100%;
             max-width: 100%;
             text-shadow: 0 0 8px #8b9a46;
         }
@@ -202,110 +201,21 @@
             padding-top: 20px;
         }
 
-        /* Планшеты (горизонтальная ориентация) */
-        @media (min-width: 768px) and (orientation: landscape) {
-            .card {
-                max-width: 900px;
-                padding: 30px 25px;
-            }
-
-            .poem {
-                min-height: 350px;
-                padding: 30px 25px;
-            }
-
+        @media (max-width: 480px) {
             .family {
-                gap: 25px;
+                gap: 5px;
             }
-        }
-
-        /* Большие планшеты */
-        @media (min-width: 1024px) {
-            .card {
-                max-width: 1000px;
-                padding: 35px 30px;
-            }
-
-            .line {
-                font-size: 1.5rem;
-                line-height: 2rem;
-            }
-
-            .member {
-                font-size: 3.2rem;
-            }
-        }
-
-        /* Телефоны в горизонтальной ориентации */
-        @media (max-height: 500px) and (orientation: landscape) {
-            body {
-                padding: 10px;
-            }
-
-            .card {
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: 2rem;
-                margin-bottom: 10px;
-            }
-
-            .poem {
-                min-height: 180px;
-                padding: 15px;
-                margin: 15px 0;
-            }
-
-            .line {
-                margin: 5px 0;
-                font-size: 1rem;
-            }
-
-            .family {
-                margin: 15px 0;
-                gap: 8px;
-            }
-
-            .member {
-                font-size: 1.8rem;
-            }
-
             .member span {
-                font-size: 0.7rem;
-                padding: 3px 6px;
-            }
-
-            .surprise {
-                padding: 15px;
-                margin: 10px 0;
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .member span {
-                font-size: 0.7rem;
-                padding: 3px 6px;
-            }
-
-            .poem {
-                padding: 15px 10px;
-                min-height: 240px;
-            }
-
-            .member {
-                min-width: 60px;
+                font-size: 0.65rem;
+                padding: 3px 5px;
             }
         }
     </style>
 </head>
 <body>
     <div class="card">
-        <!-- Листочки -->
         <div class="leaves" id="leaves"></div>
 
-        <!-- Индикатор музыки -->
         <div class="music-indicator" id="musicIndicator">
             <span>🔊</span> Музыка играет
         </div>
@@ -349,19 +259,14 @@
         </footer>
     </div>
 
-    <!-- Аудио элемент с loop -->
     <audio id="bgMusic" loop preload="auto" style="display: none;">
         <source src="Дедушка.mp3" type="audio/mpeg">
-        Твой браузер не поддерживает аудио
     </audio>
 
     <script>
-        // Создаем листочки
         function createLeaves() {
             const leavesContainer = document.getElementById('leaves');
-            // Адаптивное количество листочков
             const leafCount = window.innerWidth < 600 ? 15 : 25;
-
             for (let i = 0; i < leafCount; i++) {
                 const leaf = document.createElement('div');
                 leaf.className = 'leaf';
@@ -375,7 +280,6 @@
             }
         }
 
-        // Стих для дедушки
         const lines = [
             "В лесу, в красивом месте, дедушка живёт,",
             "Где птицы поют и сосны к небу растут.",
@@ -387,49 +291,35 @@
             "Здоровья, счастья, мира от души желаем!"
         ];
 
-        // Музыка
         let audio = document.getElementById('bgMusic');
         let musicIndicator = document.getElementById('musicIndicator');
 
         window.onload = function() {
             createLeaves();
             setTimeout(typeLines, 1000);
-
             audio.volume = 0.7;
-
-            audio.play().then(() => {
-                musicIndicator.innerHTML = '<span>🔊</span> Музыка играет';
-            }).catch(error => {
-                console.log('Автовоспроизведение заблокировано');
+            audio.play().catch(() => {
                 musicIndicator.innerHTML = '<span>🔈</span> Нажми на экран';
-
-                document.body.addEventListener('touchstart', function startMusic() {
-                    audio.play().then(() => {
-                        musicIndicator.innerHTML = '<span>🔊</span> Музыка играет';
-                    }).catch(e => console.log('Ошибка:', e));
+                document.body.addEventListener('touchstart', () => {
+                    audio.play();
+                    musicIndicator.innerHTML = '<span>🔊</span> Музыка играет';
                 }, { once: true });
-
-                document.body.addEventListener('click', function startMusicClick() {
-                    audio.play().then(() => {
-                        musicIndicator.innerHTML = '<span>🔊</span> Музыка играет';
-                    }).catch(e => console.log('Ошибка:', e));
+                document.body.addEventListener('click', () => {
+                    audio.play();
+                    musicIndicator.innerHTML = '<span>🔊</span> Музыка играет';
                 }, { once: true });
             });
         };
 
         function typeLines() {
             let lineIndex = 0;
-
             function typeNextLine() {
                 if (lineIndex >= lines.length) return;
-
                 const line = lines[lineIndex];
                 const element = document.getElementById('line' + (lineIndex + 1));
                 let charIndex = 0;
-
                 element.textContent = '';
                 element.classList.add('typing');
-
                 function typeChar() {
                     if (charIndex < line.length) {
                         element.textContent += line[charIndex];
@@ -442,17 +332,10 @@
                         setTimeout(typeNextLine, 600);
                     }
                 }
-
                 typeChar();
             }
-
             typeNextLine();
         }
-
-        audio.addEventListener('error', function() {
-            musicIndicator.innerHTML = '<span>❌</span> Файл песни не найден';
-        });
     </script>
 </body>
-
 </html>
