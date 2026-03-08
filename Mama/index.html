@@ -17,148 +17,155 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
             margin: 0;
             padding: 0;
-            font-family: 'Great Vibes', cursive;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
-            height: 100vh;
-            width: 100vw;
+            font-family: 'Great Vibes', cursive;
             background: #fce4e4;
         }
 
-        /* Видео с лепестками */
+        /* Видео с лепестками - ИСПРАВЛЕНО для телефона */
         .video-background {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             z-index: 0;
             object-fit: cover;
-            opacity: 0.6;
+            opacity: 0.8; /* Увеличил прозрачность, чтобы лучше было видно */
+            pointer-events: none;
         }
 
-        /* Затемнение */
+        /* Затемнение - сделал прозрачнее */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 240, 245, 0.25);
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 240, 245, 0.15); /* Более прозрачное */
             z-index: 1;
+            pointer-events: none;
         }
 
-        /* Подсказка "нажми на экран" */
+        /* Подсказка */
         .tap-hint {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            background: rgba(0,0,0,0.3);
-            padding: 20px 40px;
-            border-radius: 60px;
-            z-index: 5;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.4);
+            padding: 15px 30px;
+            border-radius: 50px;
+            z-index: 20;
             pointer-events: none;
             animation: pulse 2s infinite;
             white-space: nowrap;
+            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(2px);
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+            0%, 100% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
             50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
         }
 
-        /* Контейнер */
+        /* Контейнер - ИСПРАВЛЕНО для телефона */
         .container {
             position: relative;
-            z-index: 2;
-            height: 100vh;
+            z-index: 10;
             width: 100vw;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            padding: 10px;
+            pointer-events: none;
         }
 
-        /* Карточка */
+        /* Карточка - ИСПРАВЛЕНО для телефона */
         .card {
-            background: rgba(255, 250, 250, 0.92);
-            padding: 2.5rem 3rem;
-            border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-            max-width: 900px;
+            background: rgba(255, 250, 250, 0.9);
+            padding: 1.5rem 1.8rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 95vw;
             width: 100%;
-            max-height: 90vh;
+            max-height: 85vh;
             backdrop-filter: blur(3px);
-            border: 1px solid rgba(220, 220, 220, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
             display: flex;
             flex-direction: column;
-            opacity: 0.95;
+            pointer-events: auto;
+            overflow: hidden;
         }
 
-        /* Заголовок */
+        /* Заголовок - ИСПРАВЛЕНО */
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 4.5rem;
+            font-size: 3rem;
             font-weight: 400;
             color: #000000;
             text-align: center;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
             border-bottom: 2px solid #ddb7b7;
-            padding-bottom: 15px;
+            padding-bottom: 8px;
             flex-shrink: 0;
+            line-height: 1.2;
         }
 
-        /* Контейнер для стиха */
+        /* Контейнер для стиха - ИСПРАВЛЕНО */
         .poem-container {
             font-family: 'Great Vibes', cursive;
-            font-size: 2.4rem;
-            line-height: 1.6;
+            font-size: 1.9rem;
+            line-height: 1.4;
             color: #000000;
             text-align: left;
-            min-height: 250px;
-            max-height: 50vh;
+            min-height: 150px;
+            max-height: 55vh;
             overflow-y: auto;
-            margin: 15px 0;
-            padding: 15px 20px;
+            margin: 8px 0;
+            padding: 10px 12px;
             white-space: pre-wrap;
             word-break: break-word;
             font-weight: 400;
-            background: rgba(255, 240, 240, 0.3);
-            border-radius: 20px;
+            background: rgba(255, 240, 240, 0.2);
+            border-radius: 15px;
             scrollbar-width: thin;
-            scrollbar-color: #ddb7b7 #f5f5f5;
             flex: 1;
         }
 
+        /* Стили для скролла */
         .poem-container::-webkit-scrollbar {
-            width: 6px;
+            width: 4px;
         }
-
+        
         .poem-container::-webkit-scrollbar-track {
-            background: #f5f5f5;
+            background: rgba(245, 245, 245, 0.3);
             border-radius: 10px;
         }
-
+        
         .poem-container::-webkit-scrollbar-thumb {
             background: #ddb7b7;
             border-radius: 10px;
         }
 
-        /* Мигающий курсор */
+        /* Мигающий курсор - ИСПРАВЛЕНО */
         .cursor {
             display: inline-block;
-            width: 3px;
-            height: 2.4rem;
+            width: 2px;
+            height: 1.9rem;
             background-color: #000000;
-            margin-left: 3px;
+            margin-left: 2px;
             animation: blink 0.9s infinite;
             vertical-align: middle;
         }
@@ -168,49 +175,50 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* Подпись */
+        /* Подпись - ИСПРАВЛЕНО */
         .signature {
             font-family: 'Great Vibes', cursive;
-            font-size: 3rem;
+            font-size: 2.2rem;
             color: #000000;
             text-align: right;
-            margin-top: 15px;
+            margin-top: 8px;
             border-top: 1px solid #ccb2b2;
-            padding-top: 15px;
+            padding-top: 8px;
             flex-shrink: 0;
+            line-height: 1.2;
         }
 
-        /* Адаптация */
-        @media (max-width: 768px) {
-            .card { padding: 1.8rem 1.5rem; }
+        /* Адаптация для маленьких телефонов */
+        @media (max-width: 380px) {
+            .card { padding: 1rem 1.2rem; }
+            h1 { font-size: 2.5rem; }
+            .poem-container { font-size: 1.6rem; line-height: 1.3; }
+            .cursor { height: 1.6rem; }
+            .signature { font-size: 1.9rem; }
+            .tap-hint { font-size: 1.8rem; padding: 12px 24px; }
+        }
+
+        /* Для планшетов */
+        @media (min-width: 600px) and (max-width: 1024px) {
             h1 { font-size: 3.5rem; }
-            .poem-container { font-size: 2rem; }
-            .cursor { height: 2rem; }
+            .poem-container { font-size: 2.2rem; }
             .signature { font-size: 2.5rem; }
-            .tap-hint { font-size: 2rem; padding: 15px 30px; }
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 3rem; }
-            .poem-container { font-size: 1.8rem; }
-            .signature { font-size: 2.2rem; }
-            .tap-hint { font-size: 1.5rem; padding: 10px 20px; }
         }
     </style>
 </head>
 <body>
 
     <!-- Видео с розовыми лепестками -->
-    <video class="video-background" autoplay loop muted playsinline>
+    <video class="video-background" autoplay loop muted playsinline webkit-playsinline>
         <source src="1.mp4" type="video/mp4">
     </video>
 
     <div class="overlay"></div>
 
-    <!-- Подсказка (исчезнет после нажатия) -->
-    <div id="tap-hint" class="tap-hint">Нажми на экран</div>
+    <!-- Подсказка -->
+    <div id="tap-hint" class="tap-hint">👆 Нажми на экран</div>
 
-    <!-- Аудио (тихо ждет нажатия) -->
+    <!-- Аудио -->
     <audio id="background-music" preload="auto" loop>
         <source src="1.mp3" type="audio/mpeg">
     </audio>
@@ -252,13 +260,12 @@
         const signatureElement = document.getElementById('signature-block');
         const music = document.getElementById('background-music');
         const hint = document.getElementById('tap-hint');
-
+        
         let currentLine = 0;
         let currentChar = 0;
         let displayedText = '';
-        let fullTypedText = '';
-        let isMusicPlaying = false;
         let poemStarted = false;
+        let isPlaying = false;
 
         // Функция печати
         function typePoem() {
@@ -271,17 +278,21 @@
                     displayedText += line[currentChar];
                     currentChar++;
 
-                    fullTypedText = '';
+                    // Показываем все строки
+                    let fullText = '';
                     for (let i = 0; i < currentLine; i++) {
-                        fullTypedText += poemLines[i] + '\n';
+                        fullText += poemLines[i] + '\n';
                     }
-                    fullTypedText += displayedText;
+                    fullText += displayedText;
 
-                    poemElement.innerHTML = fullTypedText + '<span class="cursor"></span>';
+                    poemElement.innerHTML = fullText + '<span class="cursor"></span>';
+                    
+                    // Прокрутка вниз
                     poemElement.scrollTop = poemElement.scrollHeight;
 
-                    setTimeout(typePoem, 80);
+                    setTimeout(typePoem, 70); // Скорость печати
                 } else {
+                    // Строка завершена
                     if (currentLine < poemLines.length - 1) {
                         currentLine++;
                         currentChar = 0;
@@ -294,58 +305,46 @@
                             }
                         }
                         poemElement.innerHTML = fullText + '<span class="cursor"></span>';
-                        poemElement.scrollTop = poemElement.scrollHeight;
-
-                        setTimeout(typePoem, 400);
+                        
+                        setTimeout(typePoem, 350); // Пауза между строками
                     } else {
+                        // Стих закончен
                         let fullText = poemLines.join('\n');
                         poemElement.innerHTML = fullText;
                         signatureElement.textContent = signature;
-                        poemElement.scrollTop = poemElement.scrollHeight;
                     }
                 }
             }
         }
 
-        // Функция запуска музыки и стиха
-        function startEverything() {
-            if (isMusicPlaying) return; // Уже запущено
+        // Запуск по нажатию
+        function startApp() {
+            if (isPlaying) return;
+            isPlaying = true;
 
             // Запускаем музыку
-            music.play().then(() => {
-                console.log('Музыка играет');
-            }).catch(error => {
-                console.log('Ошибка с музыкой:', error);
-            });
+            music.play().catch(e => console.log('Музыка:', e));
 
             // Прячем подсказку
+            hint.style.transition = 'opacity 0.5s';
             hint.style.opacity = '0';
             setTimeout(() => {
                 hint.style.display = 'none';
             }, 500);
 
-            // Запускаем стих
-            if (!poemStarted) {
-                poemStarted = true;
-                setTimeout(typePoem, 500);
-            }
-
-            isMusicPlaying = true;
+            // Запускаем печать
+            poemStarted = true;
+            setTimeout(typePoem, 500);
         }
 
-        // Слушаем нажатие на всё окно
-        document.body.addEventListener('click', startEverything);
-        document.body.addEventListener('touchstart', startEverything); // Для телефонов
+        // Слушаем нажатия
+        document.addEventListener('click', startApp);
+        document.addEventListener('touchstart', startApp);
 
         // Проверка видео
         window.onload = function() {
             const video = document.querySelector('video');
-            video.addEventListener('error', function() {
-                document.body.style.background = '#fce4e4';
-            });
-
-            // Музыка не играет до нажатия
-            music.load();
+            video.play().catch(e => console.log('Видео:', e));
         };
     </script>
 
