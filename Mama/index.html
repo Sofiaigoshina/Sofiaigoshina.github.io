@@ -86,7 +86,7 @@
             padding: 15px;
         }
 
-        /* Карточка */
+        /* Карточка - ИСПРАВЛЕНО: теперь подпись всегда видна */
         .card {
             background: rgba(255, 250, 250, 0.92);
             padding: 2.5rem 3rem;
@@ -116,15 +116,15 @@
             flex-shrink: 0;
         }
 
-        /* Контейнер для стиха */
+        /* Контейнер для стиха - ИСПРАВЛЕНО: уменьшил max-height */
         .poem-container {
             font-family: 'Great Vibes', cursive;
             font-size: 2.4rem;
             line-height: 1.6;
             color: #000000;
             text-align: left;
-            min-height: 250px;
-            max-height: 50vh;
+            min-height: 200px;
+            max-height: 45vh; /* Уменьшил, чтобы освободить место для подписи */
             overflow-y: auto;
             margin: 15px 0;
             padding: 15px 20px;
@@ -168,23 +168,26 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* Подпись */
+        /* Подпись - ИСПРАВЛЕНО: всегда видна внизу */
         .signature {
             font-family: 'Great Vibes', cursive;
             font-size: 3rem;
             color: #000000;
             text-align: right;
-            margin-top: 15px;
+            margin-top: 10px;
             border-top: 1px solid #ccb2b2;
-            padding-top: 15px;
+            padding-top: 10px;
             flex-shrink: 0;
+            background: rgba(255, 250, 250, 0.9); /* Добавил фон, чтобы было видно */
+            width: 100%;
+            z-index: 3;
         }
 
         /* Адаптация */
         @media (max-width: 768px) {
             .card { padding: 1.8rem 1.5rem; }
             h1 { font-size: 3.5rem; }
-            .poem-container { font-size: 2rem; }
+            .poem-container { font-size: 2rem; max-height: 40vh; }
             .cursor { height: 2rem; }
             .signature { font-size: 2.5rem; }
             .tap-hint { font-size: 2rem; padding: 15px 30px; }
@@ -192,7 +195,7 @@
 
         @media (max-width: 480px) {
             h1 { font-size: 3rem; }
-            .poem-container { font-size: 1.8rem; }
+            .poem-container { font-size: 1.8rem; max-height: 38vh; }
             .signature { font-size: 2.2rem; }
             .tap-hint { font-size: 1.5rem; padding: 10px 20px; }
         }
@@ -300,8 +303,12 @@
                     } else {
                         let fullText = poemLines.join('\n');
                         poemElement.innerHTML = fullText;
+                        // ИСПРАВЛЕНО: подпись появляется и всегда видна
                         signatureElement.textContent = signature;
-                        poemElement.scrollTop = poemElement.scrollHeight;
+                        // Прокручиваем в самый низ, чтобы подпись была видна
+                        setTimeout(() => {
+                            poemElement.scrollTop = poemElement.scrollHeight;
+                        }, 100);
                     }
                 }
             }
@@ -350,4 +357,4 @@
     </script>
 
 </body>
-</html> 
+</html>
