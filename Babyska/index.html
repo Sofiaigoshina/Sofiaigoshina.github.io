@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>С 8 Марта, мама!</title>
+
+    <!-- Шрифт Great Vibes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Great Vibes', cursive;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background: #fce4e4;
+        }
+
+        /* Видео с лепестками */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        /* Затемнение */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 240, 245, 0.25);
+            z-index: 1;
+        }
+
+        /* Подсказка "нажми на экран" */
+        .tap-hint {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.3);
+            padding: 20px 40px;
+            border-radius: 60px;
+            z-index: 5;
+            pointer-events: none;
+            animation: pulse 2s infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        /* Контейнер */
+        .container {
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        /* Карточка */
+        .card {
+            background: rgba(255, 250, 250, 0.92);
+            padding: 2.5rem 3rem;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            backdrop-filter: blur(3px);
+            border: 1px solid rgba(220, 220, 220, 0.4);
+            display: flex;
+            flex-direction: column;
+            opacity: 0.95;
+        }
+
+        /* Заголовок */
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            font-weight: 400;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #ddb7b7;
+            padding-bottom: 15px;
+            flex-shrink: 0;
+        }
+
+        /* Контейнер для стиха */
+        .poem-container {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.4rem;
+            line-height: 1.6;
+            color: #000000;
+            text-align: left;
+            min-height: 250px;
+            max-height: 50vh;
+            overflow-y: auto;
+            margin: 15px 0;
+            padding: 15px 20px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-weight: 400;
+            background: rgba(255, 240, 240, 0.3);
+            border-radius: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #ddb7b7 #f5f5f5;
+            flex: 1;
+        }
+
+        .poem-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .poem-container::-webkit-scrollbar-track {
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .poem-container::-webkit-scrollbar-thumb {
+            background: #ddb7b7;
+            border-radius: 10px;
+        }
+
+        /* Мигающий курсор */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            height: 2.4rem;
+            background-color: #000000;
+            margin-left: 3px;
+            animation: blink 0.9s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Подпись */
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #000000;
+            text-align: right;
+            margin-top: 15px;
+            border-top: 1px solid #ccb2b2;
+            padding-top: 15px;
+            flex-shrink: 0;
+        }
+
+        /* Адаптация */
+        @media (max-width: 768px) {
+            .card { padding: 1.8rem 1.5rem; }
+            h1 { font-size: 3.5rem; }
+            .poem-container { font-size: 2rem; }
+            .cursor { height: 2rem; }
+            .signature { font-size: 2.5rem; }
+            .tap-hint { font-size: 2rem; padding: 15px 30px; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 3rem; }
+            .poem-container { font-size: 1.8rem; }
+            .signature { font-size: 2.2rem; }
+            .tap-hint { font-size: 1.5rem; padding: 10px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Видео с розовыми лепестками -->
+    <video class="video-background" autoplay loop muted playsinline>
+        <source src="1.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <!-- Подсказка (исчезнет после нажатия) -->
+    <div id="tap-hint" class="tap-hint">Нажми на экран</div>
+
+    <!-- Аудио (тихо ждет нажатия) -->
+    <audio id="background-music" preload="auto" loop>
+        <source src="1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <div class="card">
+            <h1>С 8 Марта, бабушка</h1>
+
+            <!-- Стих -->
+            <div id="poem-text" class="poem-container"></div>
+
+            <!-- Подпись -->
+            <div id="signature-block" class="signature"></div>
+        </div>
+    </div>
+
+    <script>
+// СТИХ ДЛЯ БАБУШКИ
+const poemLines = [
+    "Бабушка, с праздником! Твои внуки сейчас",
+    "Поздравляют с 8 Марта, любя тебя очень.",
+    "Ты согреваешь заботой и лаской всех нас,",
+    "Твои сказки и песни мы помним, кстати, между прочим.",
+    "",
+    "Для тебя мы всегда малыши, хоть и выросли мы,",
+    "Твои руки помнят, как нас в детстве качали.",
+    "Пусть не будет в жизни печали и тьмы,",
+    "Чтобы внуки тебя только радовать стали.",
+    "",
+    "Здоровья, бабуля, улыбок, тепла,",
+    "Чтоб душа, как подснежник весною, цвела."
+];
+
+        const signature = "Твоя внучка";
+
+        const poemElement = document.getElementById('poem-text');
+        const signatureElement = document.getElementById('signature-block');
+        const music = document.getElementById('background-music');
+        const hint = document.getElementById('tap-hint');
+
+        let currentLine = 0;
+        let currentChar = 0;
+        let displayedText = '';
+        let fullTypedText = '';
+        let isMusicPlaying = false;
+        let poemStarted = false;
+
+        // Функция печати
+        function typePoem() {
+            if (!poemStarted) return;
+
+            if (currentLine < poemLines.length) {
+                const line = poemLines[currentLine];
+
+                if (currentChar < line.length) {
+                    displayedText += line[currentChar];
+                    currentChar++;
+
+                    fullTypedText = '';
+                    for (let i = 0; i < currentLine; i++) {
+                        fullTypedText += poemLines[i] + '\n';
+                    }
+                    fullTypedText += displayedText;
+
+                    poemElement.innerHTML = fullTypedText + '<span class="cursor"></span>';
+                    poemElement.scrollTop = poemElement.scrollHeight;
+
+                    setTimeout(typePoem, 80);
+                } else {
+                    if (currentLine < poemLines.length - 1) {
+                        currentLine++;
+                        currentChar = 0;
+                        displayedText = '';
+
+                        let fullText = '';
+                        for (let i = 0; i <= currentLine; i++) {
+                            if (i < currentLine) {
+                                fullText += poemLines[i] + '\n';
+                            }
+                        }
+                        poemElement.innerHTML = fullText + '<span class="cursor"></span>';
+                        poemElement.scrollTop = poemElement.scrollHeight;
+
+                        setTimeout(typePoem, 400);
+                    } else {
+                        let fullText = poemLines.join('\n');
+                        poemElement.innerHTML = fullText;
+                        signatureElement.textContent = signature;
+                        poemElement.scrollTop = poemElement.scrollHeight;
+                    }
+                }
+            }
+        }
+
+        // Функция запуска музыки и стиха
+        function startEverything() {
+            if (isMusicPlaying) return; // Уже запущено
+
+            // Запускаем музыку
+            music.play().then(() => {
+                console.log('Музыка играет');
+            }).catch(error => {
+                console.log('Ошибка с музыкой:', error);
+            });
+
+            // Прячем подсказку
+            hint.style.opacity = '0';
+            setTimeout(() => {
+                hint.style.display = 'none';
+            }, 500);
+
+            // Запускаем стих
+            if (!poemStarted) {
+                poemStarted = true;
+                setTimeout(typePoem, 500);
+            }
+
+            isMusicPlaying = true;
+        }
+
+        // Слушаем нажатие на всё окно
+        document.body.addEventListener('click', startEverything);
+        document.body.addEventListener('touchstart', startEverything); // Для телефонов
+
+        // Проверка видео
+        window.onload = function() {
+            const video = document.querySelector('video');
+            video.addEventListener('error', function() {
+                document.body.style.background = '#fce4e4';
+            });
+
+            // Музыка не играет до нажатия
+            music.load();
+        };
+    </script>
+
+</body>
+</html>
