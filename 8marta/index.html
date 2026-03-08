@@ -50,10 +50,10 @@
             z-index: 1;
         }
 
-        /* Подсказка "нажми на экран" */
+        /* Подсказка */
         .tap-hint {
             position: fixed;
-            top: 65%;
+            top: 70%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-family: 'Great Vibes', cursive;
@@ -86,7 +86,7 @@
             padding: 15px;
         }
 
-        /* Карточка - сделал немного прозрачнее */
+        /* Карточка */
         .card {
             background: rgba(255, 250, 250, 0.85);
             padding: 2.5rem 3rem;
@@ -100,6 +100,8 @@
             display: flex;
             flex-direction: column;
             opacity: 0.95;
+            /* Важно: распределяем пространство */
+            justify-content: space-between;
         }
 
         /* Заголовок */
@@ -109,22 +111,20 @@
             font-weight: 400;
             color: #000000;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             letter-spacing: 1px;
             border-bottom: 2px solid #ddb7b7;
             padding-bottom: 10px;
-            flex-shrink: 0;
         }
 
-        /* Контейнер для стиха - уменьшил max-height, чтобы подпись влезла */
+        /* Контейнер для стиха - теперь с фиксированной высотой */
         .poem-container {
             font-family: 'Great Vibes', cursive;
             font-size: 2.4rem;
             line-height: 1.6;
             color: #000000;
             text-align: left;
-            min-height: 200px;
-            max-height: 45vh; /* Уменьшил, чтобы освободить место */
+            height: 350px; /* Фиксированная высота */
             overflow-y: auto;
             margin: 10px 0;
             padding: 15px 20px;
@@ -134,19 +134,17 @@
             background: rgba(255, 240, 240, 0.3);
             border-radius: 20px;
             scrollbar-width: thin;
-            scrollbar-color: #ddb7b7 #f5f5f5;
-            flex: 1;
         }
 
         .poem-container::-webkit-scrollbar {
             width: 6px;
         }
-
+        
         .poem-container::-webkit-scrollbar-track {
             background: #f5f5f5;
             border-radius: 10px;
         }
-
+        
         .poem-container::-webkit-scrollbar-thumb {
             background: #ddb7b7;
             border-radius: 10px;
@@ -168,7 +166,7 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* Подпись - ИСПРАВЛЕНО: всегда видна */
+        /* Подпись - теперь всегда внизу */
         .signature {
             font-family: 'Great Vibes', cursive;
             font-size: 3rem;
@@ -177,45 +175,54 @@
             margin-top: 10px;
             border-top: 1px solid #ccb2b2;
             padding-top: 10px;
-            padding-bottom: 5px;
-            flex-shrink: 0;
             background: rgba(255, 250, 250, 0.9);
             width: 100%;
-            z-index: 10;
-            display: block; /* Гарантирует отображение */
+            /* Фиксированное положение внутри карточки */
+            flex-shrink: 0;
         }
 
         /* Адаптация */
         @media (max-width: 768px) {
-            .card { padding: 1.8rem 1.5rem; }
-            h1 { font-size: 3.5rem; margin-bottom: 10px; }
-            .poem-container { font-size: 2rem; max-height: 40vh; }
+            .card { padding: 1.5rem; }
+            h1 { font-size: 3.5rem; }
+            .poem-container { 
+                font-size: 2rem; 
+                height: 300px; /* Меньше на планшете */
+            }
             .cursor { height: 2rem; }
             .signature { font-size: 2.5rem; }
             .tap-hint { font-size: 2rem; padding: 15px 30px; }
         }
 
         @media (max-width: 480px) {
-            h1 { font-size: 3rem; }
-            .poem-container { font-size: 1.8rem; max-height: 38vh; }
+            .card { padding: 1.2rem; }
+            h1 { font-size: 2.8rem; }
+            .poem-container { 
+                font-size: 1.8rem; 
+                height: 250px; /* Ещё меньше на телефоне */
+            }
             .signature { font-size: 2.2rem; }
             .tap-hint { font-size: 1.5rem; padding: 10px 20px; }
+        }
+
+        /* Для очень маленьких телефонов */
+        @media (max-width: 360px) {
+            .poem-container { 
+                height: 200px; 
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Видео с розовыми лепестками -->
     <video class="video-background" autoplay loop muted playsinline>
         <source src="1.mp4" type="video/mp4">
     </video>
 
     <div class="overlay"></div>
 
-    <!-- Подсказка (исчезнет после нажатия) -->
     <div id="tap-hint" class="tap-hint">Нажми на экран</div>
 
-    <!-- Аудио -->
     <audio id="background-music" preload="auto" loop>
         <source src="1.mp3" type="audio/mpeg">
     </audio>
@@ -227,8 +234,8 @@
             <!-- Стих -->
             <div id="poem-text" class="poem-container"></div>
 
-            <!-- Подпись -->
-            <div id="signature-block" class="signature"></div>
+            <!-- Подпись - теперь всегда видна -->
+            <div id="signature-block" class="signature">София</div>
         </div>
     </div>
 
@@ -251,17 +258,13 @@
             "Пусть радует сердце любая звезда!"
         ];
 
-        const signature = "София";
-
         const poemElement = document.getElementById('poem-text');
-        const signatureElement = document.getElementById('signature-block');
         const music = document.getElementById('background-music');
         const hint = document.getElementById('tap-hint');
 
         let currentLine = 0;
         let currentChar = 0;
         let displayedText = '';
-        let fullTypedText = '';
         let isMusicPlaying = false;
         let poemStarted = false;
 
@@ -276,13 +279,14 @@
                     displayedText += line[currentChar];
                     currentChar++;
 
-                    fullTypedText = '';
+                    // Собираем все строки
+                    let fullText = '';
                     for (let i = 0; i < currentLine; i++) {
-                        fullTypedText += poemLines[i] + '\n';
+                        fullText += poemLines[i] + '\n';
                     }
-                    fullTypedText += displayedText;
+                    fullText += displayedText;
 
-                    poemElement.innerHTML = fullTypedText + '<span class="cursor"></span>';
+                    poemElement.innerHTML = fullText + '<span class="cursor"></span>';
                     poemElement.scrollTop = poemElement.scrollHeight;
 
                     setTimeout(typePoem, 80);
@@ -303,32 +307,19 @@
 
                         setTimeout(typePoem, 400);
                     } else {
+                        // Стих закончен - убираем курсор
                         let fullText = poemLines.join('\n');
                         poemElement.innerHTML = fullText;
-                        
-                        // ИСПРАВЛЕНО: подпись появляется
-                        signatureElement.textContent = signature;
-                        
-                        // Принудительная прокрутка, чтобы подпись была видна
-                        setTimeout(() => {
-                            poemElement.scrollTop = poemElement.scrollHeight;
-                            // Прокручиваем всю карточку, если нужно
-                            window.scrollTo(0, document.body.scrollHeight);
-                        }, 100);
                     }
                 }
             }
         }
 
-        // Функция запуска музыки и стиха
+        // Запуск по нажатию
         function startEverything() {
             if (isMusicPlaying) return;
 
-            music.play().then(() => {
-                console.log('Музыка играет');
-            }).catch(error => {
-                console.log('Ошибка с музыкой:', error);
-            });
+            music.play().catch(e => console.log('Музыка:', e));
 
             hint.style.opacity = '0';
             setTimeout(() => {
@@ -343,7 +334,7 @@
             isMusicPlaying = true;
         }
 
-        // Слушаем нажатие
+        // Слушаем нажатия
         document.body.addEventListener('click', startEverything);
         document.body.addEventListener('touchstart', startEverything);
 
