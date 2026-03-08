@@ -53,7 +53,7 @@
         /* Подсказка "нажми на экран" */
         .tap-hint {
             position: fixed;
-            top: 50%;
+            top: 65%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-family: 'Great Vibes', cursive;
@@ -86,9 +86,9 @@
             padding: 15px;
         }
 
-        /* Карточка */
+        /* Карточка - сделал немного прозрачнее */
         .card {
-            background: rgba(255, 250, 250, 0.92);
+            background: rgba(255, 250, 250, 0.85);
             padding: 2.5rem 3rem;
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
@@ -109,24 +109,24 @@
             font-weight: 400;
             color: #000000;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             letter-spacing: 1px;
             border-bottom: 2px solid #ddb7b7;
-            padding-bottom: 15px;
+            padding-bottom: 10px;
             flex-shrink: 0;
         }
 
-        /* Контейнер для стиха */
+        /* Контейнер для стиха - уменьшил max-height, чтобы подпись влезла */
         .poem-container {
             font-family: 'Great Vibes', cursive;
             font-size: 2.4rem;
             line-height: 1.6;
             color: #000000;
             text-align: left;
-            min-height: 250px;
-            max-height: 50vh;
+            min-height: 200px;
+            max-height: 45vh; /* Уменьшил, чтобы освободить место */
             overflow-y: auto;
-            margin: 15px 0;
+            margin: 10px 0;
             padding: 15px 20px;
             white-space: pre-wrap;
             word-break: break-word;
@@ -168,23 +168,28 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* Подпись */
+        /* Подпись - ИСПРАВЛЕНО: всегда видна */
         .signature {
             font-family: 'Great Vibes', cursive;
             font-size: 3rem;
             color: #000000;
             text-align: right;
-            margin-top: 15px;
+            margin-top: 10px;
             border-top: 1px solid #ccb2b2;
-            padding-top: 15px;
+            padding-top: 10px;
+            padding-bottom: 5px;
             flex-shrink: 0;
+            background: rgba(255, 250, 250, 0.9);
+            width: 100%;
+            z-index: 10;
+            display: block; /* Гарантирует отображение */
         }
 
         /* Адаптация */
         @media (max-width: 768px) {
             .card { padding: 1.8rem 1.5rem; }
-            h1 { font-size: 3.5rem; }
-            .poem-container { font-size: 2rem; }
+            h1 { font-size: 3.5rem; margin-bottom: 10px; }
+            .poem-container { font-size: 2rem; max-height: 40vh; }
             .cursor { height: 2rem; }
             .signature { font-size: 2.5rem; }
             .tap-hint { font-size: 2rem; padding: 15px 30px; }
@@ -192,7 +197,7 @@
 
         @media (max-width: 480px) {
             h1 { font-size: 3rem; }
-            .poem-container { font-size: 1.8rem; }
+            .poem-container { font-size: 1.8rem; max-height: 38vh; }
             .signature { font-size: 2.2rem; }
             .tap-hint { font-size: 1.5rem; padding: 10px 20px; }
         }
@@ -210,7 +215,7 @@
     <!-- Подсказка (исчезнет после нажатия) -->
     <div id="tap-hint" class="tap-hint">Нажми на экран</div>
 
-    <!-- Аудио (тихо ждет нажатия) -->
+    <!-- Аудио -->
     <audio id="background-music" preload="auto" loop>
         <source src="1.mp3" type="audio/mpeg">
     </audio>
@@ -229,22 +234,22 @@
 
     <script>
         // СТИХ
-const poemLines = [
-    "Анна Владимировна, с праздником весны!",
-    "Вы — доктор наук, воплощение красоты.",
-    "Доцент, заведующая кафедрой умело,",
-    "Ведёте Вы знаний большое дело.",
-    "",
-    "Кафедра анализа данных и ИИ",
-    "Расцветает под руководством Вашим, посмотри!",
-    "Студентов учите мыслить, творить,",
-    "Науку и знания в них заложить.",
-    "",
-    "Желаю здоровья, успехов, добра,",
-    "Чтоб жизнь, как весна, была щедра.",
-    "Оставайтесь такой же красивой всегда,",
-    "Пусть радует сердце любая звезда!"
-];
+        const poemLines = [
+            "Анна Владимировна, с праздником весны!",
+            "Вы — доктор наук, воплощение красоты.",
+            "Доцент, заведующая кафедрой умело,",
+            "Ведёте Вы знаний большое дело.",
+            "",
+            "Кафедра анализа данных и ИИ",
+            "Расцветает под руководством Вашим, посмотри!",
+            "Студентов учите мыслить, творить,",
+            "Науку и знания в них заложить.",
+            "",
+            "Желаю здоровья, успехов, добра,",
+            "Чтоб жизнь, как весна, была щедра.",
+            "Оставайтесь такой же красивой всегда,",
+            "Пусть радует сердце любая звезда!"
+        ];
 
         const signature = "София";
 
@@ -300,8 +305,16 @@ const poemLines = [
                     } else {
                         let fullText = poemLines.join('\n');
                         poemElement.innerHTML = fullText;
+                        
+                        // ИСПРАВЛЕНО: подпись появляется
                         signatureElement.textContent = signature;
-                        poemElement.scrollTop = poemElement.scrollHeight;
+                        
+                        // Принудительная прокрутка, чтобы подпись была видна
+                        setTimeout(() => {
+                            poemElement.scrollTop = poemElement.scrollHeight;
+                            // Прокручиваем всю карточку, если нужно
+                            window.scrollTo(0, document.body.scrollHeight);
+                        }, 100);
                     }
                 }
             }
@@ -309,22 +322,19 @@ const poemLines = [
 
         // Функция запуска музыки и стиха
         function startEverything() {
-            if (isMusicPlaying) return; // Уже запущено
+            if (isMusicPlaying) return;
 
-            // Запускаем музыку
             music.play().then(() => {
                 console.log('Музыка играет');
             }).catch(error => {
                 console.log('Ошибка с музыкой:', error);
             });
 
-            // Прячем подсказку
             hint.style.opacity = '0';
             setTimeout(() => {
                 hint.style.display = 'none';
             }, 500);
 
-            // Запускаем стих
             if (!poemStarted) {
                 poemStarted = true;
                 setTimeout(typePoem, 500);
@@ -333,9 +343,9 @@ const poemLines = [
             isMusicPlaying = true;
         }
 
-        // Слушаем нажатие на всё окно
+        // Слушаем нажатие
         document.body.addEventListener('click', startEverything);
-        document.body.addEventListener('touchstart', startEverything); // Для телефонов
+        document.body.addEventListener('touchstart', startEverything);
 
         // Проверка видео
         window.onload = function() {
@@ -343,8 +353,6 @@ const poemLines = [
             video.addEventListener('error', function() {
                 document.body.style.background = '#fce4e4';
             });
-
-            // Музыка не играет до нажатия
             music.load();
         };
     </script>
