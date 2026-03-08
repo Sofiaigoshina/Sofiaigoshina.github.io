@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>С 8 Марта, мама!</title>
-
-    <!-- Шрифт Great Vibes -->
+    <title>С 8 Марта, бабушка!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
@@ -36,7 +34,7 @@
             height: 100%;
             z-index: 0;
             object-fit: cover;
-            opacity: 0.6;
+            opacity: 0.7;
         }
 
         /* Затемнение */
@@ -46,14 +44,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 240, 245, 0.25);
+            background: rgba(255, 240, 245, 0.15);
             z-index: 1;
         }
 
-        /* Подсказка "нажми на экран" */
         .tap-hint {
             position: fixed;
-            top: 50%;
+            top: 65%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-family: 'Great Vibes', cursive;
@@ -86,23 +83,21 @@
             padding: 15px;
         }
 
-        /* Карточка */
         .card {
-            background: rgba(255, 250, 250, 0.92);
+            background: rgba(255, 250, 250, 0.75);
             padding: 2.5rem 3rem;
             border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             max-width: 900px;
             width: 100%;
             max-height: 90vh;
-            backdrop-filter: blur(3px);
-            border: 1px solid rgba(220, 220, 220, 0.4);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             display: flex;
             flex-direction: column;
             opacity: 0.95;
         }
 
-        /* Заголовок */
         h1 {
             font-family: 'Great Vibes', cursive;
             font-size: 4.5rem;
@@ -111,9 +106,10 @@
             text-align: center;
             margin-bottom: 20px;
             letter-spacing: 1px;
-            border-bottom: 2px solid #ddb7b7;
+            border-bottom: 2px solid rgba(221, 183, 183, 0.8);
             padding-bottom: 15px;
             flex-shrink: 0;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
         }
 
         /* Контейнер для стиха */
@@ -123,19 +119,20 @@
             line-height: 1.6;
             color: #000000;
             text-align: left;
-            min-height: 250px;
-            max-height: 50vh;
+            min-height: 200px;
+            max-height: 45vh;
             overflow-y: auto;
             margin: 15px 0;
             padding: 15px 20px;
             white-space: pre-wrap;
             word-break: break-word;
             font-weight: 400;
-            background: rgba(255, 240, 240, 0.3);
+            background: rgba(255, 240, 240, 0.2);
             border-radius: 20px;
             scrollbar-width: thin;
             scrollbar-color: #ddb7b7 #f5f5f5;
             flex: 1;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
         }
 
         .poem-container::-webkit-scrollbar {
@@ -143,7 +140,7 @@
         }
 
         .poem-container::-webkit-scrollbar-track {
-            background: #f5f5f5;
+            background: rgba(245, 245, 245, 0.5);
             border-radius: 10px;
         }
 
@@ -168,83 +165,78 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* Подпись */
         .signature {
             font-family: 'Great Vibes', cursive;
             font-size: 3rem;
             color: #000000;
             text-align: right;
-            margin-top: 15px;
-            border-top: 1px solid #ccb2b2;
-            padding-top: 15px;
+            margin-top: 10px;
+            border-top: 1px solid rgba(204, 178, 178, 0.8);
+            padding-top: 10px;
             flex-shrink: 0;
+            background: rgba(255, 250, 250, 0.7);
+            width: 100%;
+            z-index: 3;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
         }
 
-        /* Адаптация */
         @media (max-width: 768px) {
-            .card { padding: 1.8rem 1.5rem; }
+            .card { padding: 1.8rem 1.5rem; background: rgba(255, 250, 250, 0.7); }
             h1 { font-size: 3.5rem; }
-            .poem-container { font-size: 2rem; }
+            .poem-container { font-size: 2rem; max-height: 40vh; background: rgba(255, 240, 240, 0.15); }
             .cursor { height: 2rem; }
-            .signature { font-size: 2.5rem; }
-            .tap-hint { font-size: 2rem; padding: 15px 30px; }
+            .signature { font-size: 2.5rem; background: rgba(255, 250, 250, 0.65); }
+            .tap-hint { font-size: 2rem; padding: 15px 30px; top: 65%; }
         }
 
         @media (max-width: 480px) {
             h1 { font-size: 3rem; }
-            .poem-container { font-size: 1.8rem; }
+            .poem-container { font-size: 1.8rem; max-height: 38vh; }
             .signature { font-size: 2.2rem; }
-            .tap-hint { font-size: 1.5rem; padding: 10px 20px; }
+            .tap-hint { font-size: 1.5rem; padding: 10px 20px; top: 70%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Видео с розовыми лепестками -->
     <video class="video-background" autoplay loop muted playsinline>
         <source src="1.mp4" type="video/mp4">
     </video>
-
     <div class="overlay"></div>
-
-    <!-- Подсказка (исчезнет после нажатия) -->
     <div id="tap-hint" class="tap-hint">Нажми на экран</div>
-
-    <!-- Аудио (тихо ждет нажатия) -->
     <audio id="background-music" preload="auto" loop>
         <source src="1.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container">
         <div class="card">
-            <h1>С 8 Марта, бабушка</h1>
-
-            <!-- Стих -->
+            <h1>С 8 Марта, бабушка!</h1>
             <div id="poem-text" class="poem-container"></div>
 
-            <!-- Подпись -->
             <div id="signature-block" class="signature"></div>
         </div>
     </div>
 
     <script>
-// СТИХ ДЛЯ БАБУШКИ
+
 const poemLines = [
-    "Бабушка, с праздником! Твои внуки сейчас",
-    "Поздравляют с 8 Марта, любя тебя очень.",
-    "Ты согреваешь заботой и лаской всех нас,",
-    "Твои сказки и песни мы помним, кстати, между прочим.",
+    "Бабушка, с праздником, с женским днём!",
+    "Шлём поздравления из дома в ваш дом.",
+    "Там, где подмосковный лес и тишина,",
+    "Где с дедом живёте вы - весна.",
     "",
-    "Для тебя мы всегда малыши, хоть и выросли мы,",
-    "Твои руки помнят, как нас в детстве качали.",
-    "Пусть не будет в жизни печали и тьмы,",
-    "Чтобы внуки тебя только радовать стали.",
+    "Внуков у вас много — шлют вам привет,",
+    "Здоровья и счастья на много лет.",
+    "Пусть в доме уютно будет всегда,",
+    "Пусть не грустится вам никогда.",
     "",
-    "Здоровья, бабуля, улыбок, тепла,",
-    "Чтоб душа, как подснежник весною, цвела."
+    "Спасибо за всё, за тепло и уют,",
+    "Пусть радостно птицы в лесу поют.",
+    "С 8 Марта, бабушка, мир вам и свет,",
+    "От всех внуков большой-большой привет!"
 ];
 
-        const signature = "Твоя внучка";
+        const signature = "Твоя внучка"; 
 
         const poemElement = document.getElementById('poem-text');
         const signatureElement = document.getElementById('signature-block');
@@ -299,30 +291,29 @@ const poemLines = [
                         let fullText = poemLines.join('\n');
                         poemElement.innerHTML = fullText;
                         signatureElement.textContent = signature;
-                        poemElement.scrollTop = poemElement.scrollHeight;
+                        setTimeout(() => {
+                            poemElement.scrollTop = poemElement.scrollHeight;
+                        }, 100);
                     }
                 }
             }
         }
 
-        // Функция запуска музыки и стиха
+        // Функция запуска
         function startEverything() {
-            if (isMusicPlaying) return; // Уже запущено
+            if (isMusicPlaying) return;
 
-            // Запускаем музыку
             music.play().then(() => {
                 console.log('Музыка играет');
             }).catch(error => {
                 console.log('Ошибка с музыкой:', error);
             });
 
-            // Прячем подсказку
             hint.style.opacity = '0';
             setTimeout(() => {
                 hint.style.display = 'none';
             }, 500);
 
-            // Запускаем стих
             if (!poemStarted) {
                 poemStarted = true;
                 setTimeout(typePoem, 500);
@@ -331,9 +322,9 @@ const poemLines = [
             isMusicPlaying = true;
         }
 
-        // Слушаем нажатие на всё окно
+        // Слушаем нажатие
         document.body.addEventListener('click', startEverything);
-        document.body.addEventListener('touchstart', startEverything); // Для телефонов
+        document.body.addEventListener('touchstart', startEverything);
 
         // Проверка видео
         window.onload = function() {
@@ -341,8 +332,6 @@ const poemLines = [
             video.addEventListener('error', function() {
                 document.body.style.background = '#fce4e4';
             });
-
-            // Музыка не играет до нажатия
             music.load();
         };
     </script>
